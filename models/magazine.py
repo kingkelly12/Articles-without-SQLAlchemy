@@ -1,4 +1,4 @@
-from lib.db.connection import get_connection
+from db.connection import get_connection
 
 class Magazine:
     def __init__(self, id=None, name=None, category=None):
@@ -58,7 +58,7 @@ class Magazine:
         return [cls(id=row['id'], name=row['name'], category=row['category']) for row in rows]
 
     def articles(self):
-        from lib.models.article import Article
+        from models.article import Article
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM articles WHERE magazine_id = ?", (self.id,))
@@ -67,7 +67,7 @@ class Magazine:
         return [Article(id=row['id'], title=row['title'], author_id=row['author_id'], magazine_id=row['magazine_id']) for row in rows]
 
     def contributors(self):
-        from lib.models.author import Author
+        from models.author import Author
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -88,7 +88,7 @@ class Magazine:
         return [row['title'] for row in rows]
 
     def contributing_authors(self):
-        from lib.models.author import Author
+        from models.author import Author
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""

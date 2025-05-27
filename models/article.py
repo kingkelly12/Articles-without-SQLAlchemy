@@ -1,4 +1,4 @@
-from lib.db.connection import get_connection
+from db.connection import get_connection
 
 class Article:
     def __init__(self, id=None, title=None, author_id=None, magazine_id=None):
@@ -55,11 +55,11 @@ class Article:
         return None
 
     def author(self):
-        from lib.models.author import Author
+        from models.author import Author
         return Author.find_by_id(self.author_id)
 
     def magazine(self):
-        from lib.models.magazine import Magazine
+        from models.magazine import Magazine
         return Magazine.find_by_id(self.magazine_id)
 
     @classmethod

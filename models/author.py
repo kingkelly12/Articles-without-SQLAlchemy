@@ -1,4 +1,4 @@
-from lib.db.connection import get_connection
+from db.connection import get_connection
 
 class Author:
     def __init__(self, id=None, name=None):
@@ -55,7 +55,7 @@ class Author:
         return [Article(id=row['id'], title=row['title'], author_id=row['author_id'], magazine_id=row['magazine_id']) for row in rows]
 
     def magazines(self):
-        from lib.models.magazine import Magazine
+        from models.magazine import Magazine
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -68,7 +68,7 @@ class Author:
         return [Magazine(id=row['id'], name=row['name'], category=row['category']) for row in rows]
 
     def add_article(self, magazine, title):
-        from lib.models.article import Article
+        from models.article import Article
         article = Article(title=title, author_id=self.id, magazine_id=magazine.id)
         article.save()
         return article
