@@ -1,11 +1,11 @@
-from lib.db.connection import get_connection
+from db.connection import get_connection
 
 def setup_database():
     conn = get_connection()
     cursor = conn.cursor()
     
    
-    with open('lib/db/schema.sql', 'r') as f:
+    with open('db/schema.sql', 'r') as f:
         schema = f.read()
     cursor.executescript(schema)
     
